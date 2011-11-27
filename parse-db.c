@@ -1,7 +1,7 @@
 /*
- * $Id$
+ * Copyright (C) 2010, 2011 Christian Jahn
  *
- * @(#) parse-db.c
+ * @(#)parse-db.c
  *
  */
 
@@ -10,10 +10,12 @@
 #include <string.h>
 #include <unistd.h>
 
+static char *db = "db";
+
 void
 usage(void)
 {
-	fprintf(stderr, "usage: parse-db"
+	(void) fprintf(stderr, "usage: parse-db"
 	    " -f registry prefix ...\n");
 	exit(1);
 }
@@ -21,9 +23,7 @@ usage(void)
 int
 main(int argc, char *argv[])
 {
-	int	 chr;
-	char	*db;
-	char	*prefix;
+	int chr;
 
 	while ((chr = getopt(argc, argv, "+f:")) > 0) {
 		switch (chr) {
@@ -36,16 +36,16 @@ main(int argc, char *argv[])
 		}
 	}
 
-	if (argc - optind != 1)
+	argc -= optind;
+	argv += optind;
+
+	if (argc < 1)
 		usage();
 		/* NOTREACHED */
 
-	prefix = argv[optind];
-
 #ifdef DEBUG
-	fprintf(stderr, "DEBUG: DB = %s, PREFIX = %s\n", db, prefix);
+	(void) fprintf(stderr, "DEBUG: DB = %s\n", db);
 #endif
 
 	return 0;
 }
-
