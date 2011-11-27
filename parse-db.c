@@ -42,10 +42,8 @@ main(int argc, char *argv[])
 	if (argc < 1)
 		usage();
 		/* NOTREACHED */
-
 #ifdef DEBUG
 	(void) fprintf(stderr, "DEBUG: DB = %s\n", db);
 #endif
-
 	return 0;
 }
